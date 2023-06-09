@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import styles from'./Login.module.css';
+import styles from './Login.module.css';
+
 
 const Login = () => {
+
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [loginError, setLoginError] = useState('');
@@ -51,7 +53,7 @@ const Login = () => {
     setDataNascimento(event.target.value);
   };
 
-  
+
 
   const handleCadastro = async (event) => {
     event.preventDefault();
@@ -83,79 +85,85 @@ const Login = () => {
   };
 
   return (
+
+
+
     <div className={styles.container}>
-    {loginError && <p className={styles.error}>{loginError}</p>}
-    <h2>Login</h2>
-    {loginError && <p>{loginError}</p>}
-    {!cadastro ? (
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Senha:</label>
-          <input
-            type="senha"
-            value={senha}
-            onChange={handleSenhaChange}
-            required
-          />
-        </div>
-        <button type="submit">Entrar</button>
-        <h1 style={{ fontSize: '1.5rem' }}>Ainda não possui uma conta?</h1>
-        <p onClick={toggleCadastro} className={styles.link}>Clique aqui para se cadastrar.</p>
-      </form>
-    ) : (
-      <form onSubmit={handleCadastro}>
-        <div>
-          <label>Nome:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={handleNameChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Senha:</label>
-          <input
-            type="senha"
-            value={senha}
-            onChange={handleSenhaChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Data de Nascimento:</label>
-          <input
-            type="date"
-            value={dataNascimento}
-            onChange={handledataNascimentoChange}
-            required
-          />
-        </div>
-        <button type="submit">Cadastrar</button>
-        <h1 style={{ fontSize: '1.5rem' }}>Já possui uma conta? </h1>
-        <p onClick={toggleCadastro} className={styles.link}>Clique aqui para fazer login.</p>
-      </form>
-    )}
-  </div>
-);
+      <h1> Login/Cadastro</h1>
+      <h2>
+      Por favor crie sua conta ou se ja tem faça o login abaixo !
+      </h2>
+      {loginError && <p className={styles.error}>{loginError}</p>}
+      {loginError && <p>{loginError}</p>}
+      {!cadastro ? (
+        <form onSubmit={handleLogin}>
+          <div>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Senha:</label>
+            <input
+              type="senha"
+              value={senha}
+              onChange={handleSenhaChange}
+              required
+            />
+          </div>
+          <button type="submit">Entrar</button>
+          <h1 style={{ fontSize: '1.5rem' }}>Ainda não possui uma conta?</h1>
+          <p onClick={toggleCadastro} className={styles.link}>Clique aqui para se cadastrar.</p>
+        </form>
+      ) : (
+        <form onSubmit={handleCadastro}>
+          <div>
+            <label>Nome:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={handleNameChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Senha:</label>
+            <input
+              type="senha"
+              value={senha}
+              onChange={handleSenhaChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Data de Nascimento:</label>
+            <input
+              type="date"
+              value={dataNascimento}
+              onChange={handledataNascimentoChange}
+              required
+            />
+          </div>
+          <button type="submit">Cadastrar</button>
+          <h1 style={{ fontSize: '1.5rem' }}>Já possui uma conta? </h1>
+          <p onClick={toggleCadastro} className={styles.link}>Clique aqui para fazer login.</p>
+        </form>
+      )}
+    </div>
+  );
 };
 export default Login;
 

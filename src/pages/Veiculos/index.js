@@ -16,7 +16,11 @@ function ListaCarros({ onAddCar }) {
   
     return (
       <div className="container">
-        <h1>Registe o seu veiculo :</h1>
+        <h1> Registro de Veiculo:</h1>
+      <h2>
+      Registre o seu veiculo em nosso sistema e saiba tudo sobre ele !
+      </h2>
+        
         <form onSubmit={handleSubmit}>
           <label>
             Marca:
