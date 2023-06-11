@@ -5,36 +5,40 @@ import styles from './Login.module.css';
 const Login = () => {
 
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [cadastro, setCadastro] = useState(false);
   const [name, setName] = useState('');
   const [dataNascimento, setDataNascimento] = useState('');
+  const [cadastroRealizado, setCadastroRealizado] = useState(false);
+  const [loginRealizado, setLoginRealizado] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
-  const handleSenhaChange = (event) => {
-    setSenha(event.target.value);
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3333/Login', {
+      const response = await fetch('http://localhost:3333/session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, senha }),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
       if (data.success) {
         // Login válido
+        setLoginRealizado(true);
         console.log(data.user.name);
+        alert('Login realizado com sucesso!');
       } else {
         // Login inválido
         setLoginError(data.message);
@@ -59,20 +63,22 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3333/Login', {
+      const response = await fetch('http://localhost:3333/Users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, senha, dataNascimento }),
+        body: JSON.stringify({ name, email, password, dataNascimento }),
       });
 
       const data = await response.json();
       if (data.success) {
-        // Login válido
+        // Cadastro válido
+        setCadastroRealizado(true);
         console.log(data.user.name);
+        alert('Cadastro realizado com sucesso!');
       } else {
-        // Login inválido
+        // Cadastro inválido
         setLoginError(data.message);
       }
     } catch (error) {
@@ -86,12 +92,10 @@ const Login = () => {
 
   return (
 
-
-
     <div className={styles.container}>
       <h1> Login/Cadastro</h1>
       <h2>
-      Por favor crie sua conta ou se ja tem faça o login abaixo !
+        Por favor crie sua conta ou se ja tem faça o login abaixo !
       </h2>
       {loginError && <p className={styles.error}>{loginError}</p>}
       {loginError && <p>{loginError}</p>}
@@ -110,8 +114,8 @@ const Login = () => {
             <label>Senha:</label>
             <input
               type="senha"
-              value={senha}
-              onChange={handleSenhaChange}
+              value={password}
+              onChange={handlePasswordChange}
               required
             />
           </div>
@@ -143,8 +147,8 @@ const Login = () => {
             <label>Senha:</label>
             <input
               type="senha"
-              value={senha}
-              onChange={handleSenhaChange}
+              value={password}
+              onChange={handlePasswordChange}
               required
             />
           </div>
